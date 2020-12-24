@@ -45,7 +45,7 @@ export default function Main(props){
             setPatronValido(true)
             setCargando(true)
             const resultado = await validarString(entrada)
-            setCargando(true)
+            setCargando(false)
             console.log(resultado)
             props.history.push(`/resultado/${resultado}`)
         }else{
