@@ -21,7 +21,7 @@ export default function TextoAyuda(){
                 <h2 style={{
                     color:"white"
                 }}>
-                    {`Por ultimo, no se permite el ingreso de cadenas vacias para la validacion ni espacios en blanco entre caracteres`}
+                    {`Por ultimo, no se permite el ingreso de cadenas vacias para la validacion, tampoco espacios en blanco entre caracteres ni mayusculas`}
                 </h2>
         </>
     )

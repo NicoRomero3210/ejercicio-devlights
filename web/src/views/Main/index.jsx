@@ -35,7 +35,7 @@ export default function Main(props){
         if(entrada.length === 0){
             setPatronValido(false)
         }
-        const patron = new RegExp(/^[A-Za-z]+$/g)
+        const patron = new RegExp(/^[a-z]+$/g)
         const patronValidado = patron.test(entrada)
         if(patronValidado === true){
             setPatronValido(true)
