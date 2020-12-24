@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import {Grid,Card,CardHeader,Button,TextField} from '@material-ui/core'
 import Formulario from '../../components/Formulario'
 import {validarString} from '../../functions/funciones'
 
@@ -15,7 +14,6 @@ export default function Main(props){
     const validacion = () => {
         if(entrada.length === 0){
             setPatronValido(false)
-            //props.history.push(`/resultado/NO`)
         }
         const patron = new RegExp(/^[A-Za-z]+$/g)
         const patronValidado = patron.test(entrada)
@@ -30,13 +28,16 @@ export default function Main(props){
         }
         
     }
+    const sacarError = () => {
+        setPatronValido(true)
+    }
     const irAyuda = () => {
         props.history.push('/ayuda')
     }
 
     return(
         <>
-            <Formulario navegarAyuda={irAyuda} entrada={entrada} patronVal={patronValido} manejarEntrada={handleChangeInput} validar={validacion} color={patronValido===true ? 'primary' : 'secondary'}/>            
+            <Formulario sacarError={sacarError} navegarAyuda={irAyuda} entrada={entrada} patronVal={patronValido} manejarEntrada={handleChangeInput} validar={validacion} color={patronValido===true ? 'primary' : 'secondary'}/>            
         </>
     )
 }
