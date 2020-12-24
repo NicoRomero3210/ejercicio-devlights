@@ -3,6 +3,7 @@ import Formulario from '../../components/Formulario'
 import {validarString} from '../../functions/funciones'
 import {Grid,Card,CardHeader} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const estilos = makeStyles((theme) => ({
     anchos: {
@@ -25,13 +26,15 @@ const estilos = makeStyles((theme) => ({
 export default function Main(props){
     const [entrada,setEntrada] = useState("")
     const [patronValido,setPatronValido] = useState(true)
+    const [cargando,setCargando] = useState(false)
+
     const estilosAplicados = estilos()
     const handleChangeInput = (data) => {
         setEntrada(data)
         console.log(entrada)
     }
 
-    const validacion = () => {
+    const validacion = async() => {
         if(entrada.length === 0 || entrada.length > Math.pow(10,5)){
             setPatronValido(false)
             return
@@ -40,7 +43,10 @@ export default function Main(props){
         const patronValidado = patron.test(entrada)
         if(patronValidado === true){
             setPatronValido(true)
-            const resultado = validarString(entrada)
+            setCargando(true)
+            const resultado = await validarString(entrada)
+            setCargando(true)
+            console.log(resultado)
             props.history.push(`/resultado/${resultado}`)
         }else{
             setPatronValido(false)
@@ -67,10 +73,28 @@ export default function Main(props){
             alignContent="center"
         >
             <Card className={estilosAplicados.anchos}>
-                <Grid container direction="row" style={{height:"10%"}}>
-                    <CardHeader title="Validar Cadena" />
+                {cargando===true ? 
+                (
+                <Grid container direction="row" justify="cente" style={{height:"100%"}}>
+                    <CircularProgress />
                 </Grid>
-                    <Formulario sacarError={sacarError} navegarAyuda={irAyuda} entrada={entrada} patronVal={patronValido} manejarEntrada={handleChangeInput} validar={validacion} color={patronValido===true ? 'primary' : 'secondary'}/>            
+                ) : 
+                (
+                <>
+                    <Grid container direction="row" style={{height:"10%"}}>
+                        <CardHeader title="Validar Cadena" />
+                    </Grid>
+                    <Formulario 
+                        sacarError={sacarError} 
+                        navegarAyuda={irAyuda} 
+                        entrada={entrada} 
+                        patronVal={patronValido} 
+                        manejarEntrada={handleChangeInput} 
+                        validar={validacion} 
+                        color={patronValido===true ? 'primary' : 'secondary'}
+                    />
+                    </>
+                )}           
             </Card>
         </Grid>
     )

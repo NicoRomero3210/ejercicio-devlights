@@ -1,18 +1,24 @@
 export const validarString = (string) => {
-    if(string.length === 1){
-        console.log("SI")
-        return "SI"
-    }
-    let ocurrencias = contarOcurrencias(string)
-    if(ocurrencias[0].apariciones===ocurrencias[ocurrencias.length -1].apariciones){
-        return "SI"
-    }else if((ocurrencias[0].apariciones-ocurrencias[ocurrencias.length - 1].apariciones) > 1){
-        return "NO"
-    }else if(ocurrencias[0].apariciones > ocurrencias[1].apariciones){
-        return "SI"
-    }else{
-        return "NO"
-    }
+    return new Promise((res,rej)=>{
+        try{    
+            if(string.length === 1){
+                console.log("SI")
+                res("SI")
+            }
+            let ocurrencias = contarOcurrencias(string)
+            if(ocurrencias[0].apariciones===ocurrencias[ocurrencias.length -1].apariciones){
+                res("SI")
+            }else if((ocurrencias[0].apariciones-ocurrencias[ocurrencias.length - 1].apariciones) > 1){
+                res("NO")
+            }else if(ocurrencias[0].apariciones > ocurrencias[1].apariciones){
+                res("SI")
+            }else{
+                res("NO")
+            }
+        }catch(e){
+            rej(e)
+        }
+    })
 } 
 
 export const contarOcurrencias = (cadena)=>{
