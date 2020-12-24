@@ -32,21 +32,19 @@ export default function Main(props){
     }
 
     const validacion = () => {
-        if(entrada.length === 0){
+        if(entrada.length === 0 || entrada.length > Math.pow(10,5)){
             setPatronValido(false)
+            return
         }
         const patron = new RegExp(/^[a-z]+$/g)
         const patronValidado = patron.test(entrada)
         if(patronValidado === true){
             setPatronValido(true)
             const resultado = validarString(entrada)
-            console.log(resultado)
-            console.log(props)
             props.history.push(`/resultado/${resultado}`)
         }else{
             setPatronValido(false)
         }
-        
     }
     const sacarError = () => {
         setPatronValido(true)
@@ -57,13 +55,13 @@ export default function Main(props){
     
 
     return(
-        <Grid container style={
-            {
+        <Grid 
+            container 
+            style={{
                 width:"100%",
                 height: "85vh",
                 backgroundColor: "#454545"
-            }
-            } 
+            }} 
             direction="row" 
             justify="center" 
             alignContent="center"
