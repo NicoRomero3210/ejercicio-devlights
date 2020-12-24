@@ -12,7 +12,7 @@ export default function TextoAyuda(){
                 <h2 style={{
                     color:"white"
                 }}>
-                    {`Luego debemos ingresar solo letras, y por ultimo debemos entender
+                    {`Luego debemos ingresar solo letras, ademas debemos saber
                     que todas las letras deberian tenener la misma frecuencia, solo una podria diferir en 
                     su frecuencia y solo puede tener una diferencia de uno, es
                     decir, que si difiere en mas de una repeiticion con la frecuencia
